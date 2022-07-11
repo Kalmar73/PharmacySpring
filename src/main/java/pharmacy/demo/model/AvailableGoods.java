@@ -10,17 +10,17 @@ import javax.persistence.Table;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "Available_Goods")
+@Table(name = "AvailableGoods")
 @Getter
 @Setter
 @ToString
-public class Available_Goods extends BaseEntity{
-    @Column(name = "Pharmacy_Number")
-    private String pharNumb;
-    @Column(name = "Goods_Code")
-    private String goodsCode;
-    @Column(name = "Payment_Type")
-    private String paymentType;
+public class AvailableGoods extends BaseEntity{
+    @Column(name = "PharmacyId")
+    private Long pharmacyId;
+    @Column(name = "GoodsId")
+    private Long goodsId;
     @Column(name = "Price")
     private BigDecimal price;
+    @Column(name = "Amount")
+    private Long amount;
 }

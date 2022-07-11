@@ -15,5 +15,5 @@ import javax.persistence.MappedSuperclass;
 public class BaseEntity {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 }

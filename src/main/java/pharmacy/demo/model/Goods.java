@@ -14,10 +14,6 @@ import javax.persistence.Table;
 @Setter
 @ToString
 public class Goods extends BaseEntity{
-    @Column(name = "Goods_Code")
-    private String code;
     @Column(name = "Name")
     private String name;
-    @Column(name = "Category_Code")
-    private String categoryCode;
 }

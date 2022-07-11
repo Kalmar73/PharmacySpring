@@ -14,8 +14,6 @@ import javax.persistence.Table;
 @Setter
 @ToString
 public class Pharmacy extends BaseEntity {
-    @Column(name = "Pharmacy_Number")
-    private String number;
     @Column(name = "Name")
     private String name;
     @Column(name = "Address")

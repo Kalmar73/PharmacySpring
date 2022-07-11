@@ -9,13 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Category")
+@Table(name = "Characteristics")
 @Getter
 @Setter
 @ToString
-public class Category extends BaseEntity{
-    @Column(name = "Category_Name")
+public class Characteristic extends BaseEntity{
+    @Column(name = "Name")
     private String name;
-    @Column(name = "Category_Code")
-    private String categoryCode;
 }
