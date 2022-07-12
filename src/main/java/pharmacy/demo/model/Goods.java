@@ -18,4 +18,7 @@ public class Goods {
 
     @OneToMany(mappedBy = "goods",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<AvailableGoods> availableGoodsList;
+
+    @OneToMany(mappedBy = "goods",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<GoodsCharacteristics> goodsCharacteristicsList;
 }

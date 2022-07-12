@@ -16,4 +16,7 @@ public class Characteristic{
 
     @Column(name = "Name")
     private String name;
+
+    @OneToMany(mappedBy = "characteristic",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<GoodsCharacteristics> goodsCharacteristicsList;
 }
