@@ -1,13 +1,10 @@
 package pharmacy.demo.model;
 
-import lombok.Data;
-
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
 @Table(name = "Goods")
 public class Goods {
     @Id
@@ -15,6 +12,38 @@ public class Goods {
     private Long id;
     @Column(name = "Name")
     private String name;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<AvailableGoods> getAvailableGoodsList() {
+        return availableGoodsList;
+    }
+
+    public void setAvailableGoodsList(List<AvailableGoods> availableGoodsList) {
+        this.availableGoodsList = availableGoodsList;
+    }
+
+    public List<GoodsCharacteristics> getGoodsCharacteristicsList() {
+        return goodsCharacteristicsList;
+    }
+
+    public void setGoodsCharacteristicsList(List<GoodsCharacteristics> goodsCharacteristicsList) {
+        this.goodsCharacteristicsList = goodsCharacteristicsList;
+    }
 
     @OneToMany(mappedBy = "goods",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<AvailableGoods> availableGoodsList;

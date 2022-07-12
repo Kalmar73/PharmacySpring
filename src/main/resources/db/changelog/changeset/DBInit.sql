@@ -1,6 +1,7 @@
+
 Create Table if not exists pharmacy
 (
-    id   INT Primary key AUTO_INCREMENT,
+    Id   INT Primary key AUTO_INCREMENT,
     name              varchar(60) NOT NULL,
     phone      varchar(11) NOT NULL,
     address            varchar(120) NOT NULL,
@@ -14,10 +15,12 @@ Create Table if not exists Goods
 Create Table if not exists AvailableGoods
 (
     Id INT PRIMARY KEY AUTO_INCREMENT,
-    PharmacyId LONG References Pharmacy (Id),
-    GoodsId      LONG References Goods (Id),
+    pharmacy_id INT,
+    goods_id      INT,
     Price DECIMAL NOT NULL ,
-    Amount    LONG NOT NULL
+    Amount    LONG NOT NULL,
+    FOREIGN KEY (pharmacy_id) references pharmacy(Id),
+    FOREIGN KEY (goods_id) references Goods(Id)
 );
 Create Table if not exists Characteristic
 (
@@ -27,7 +30,9 @@ Create Table if not exists Characteristic
 Create Table if not exists Goodscharacteristics
 (
     Id INT PRIMARY KEY AUTO_INCREMENT,
-    CharId       LONG References Characteristic (Id),
-    GoodsId                 LONG References Goods (Id),
-    Description varchar(300)
+    characteristic_id       INT References Characteristic (Id),
+    goods_id                 INT References Goods (Id),
+    Description varchar(300),
+    FOREIGN KEY (characteristic_id) references Characteristic(Id),
+    FOREIGN KEY (goods_id) references Goods(Id)
 );

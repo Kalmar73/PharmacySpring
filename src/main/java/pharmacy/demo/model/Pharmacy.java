@@ -1,6 +1,6 @@
 package pharmacy.demo.model;
 
-import lombok.Data;
+
 
 
 import javax.persistence.*;
@@ -8,11 +8,58 @@ import java.util.List;
 
 @Entity
 @Table(name = "pharmacy")
-@Data
 public class Pharmacy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public List<AvailableGoods> getAvailableGoodsList() {
+        return availableGoodsList;
+    }
+
+    public void setAvailableGoodsList(List<AvailableGoods> availableGoodsList) {
+        this.availableGoodsList = availableGoodsList;
+    }
 
     @Column(name = "name")
     private String name;
