@@ -72,7 +72,7 @@ public class PharmacyRestController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Pharmacy>> getAllCustomers() {
         List<Pharmacy> pharmacies = pharmacyService.getAll();
 

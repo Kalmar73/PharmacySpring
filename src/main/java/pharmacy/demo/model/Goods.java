@@ -1,19 +1,21 @@
 package pharmacy.demo.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Data
 @Table(name = "Goods")
-@Getter
-@Setter
-@ToString
-public class Goods extends BaseEntity{
+public class Goods {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(name = "Name")
     private String name;
+
+    @OneToMany(mappedBy = "goods",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<AvailableGoods> availableGoodsList;
 }

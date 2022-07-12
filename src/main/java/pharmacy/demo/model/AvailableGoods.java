@@ -1,26 +1,27 @@
 package pharmacy.demo.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "AvailableGoods")
-@Getter
-@Setter
-@ToString
+@Data
+@Table(name = "Availablegoods")
 public class AvailableGoods extends BaseEntity{
-    @Column(name = "PharmacyId")
-    private Long pharmacyId;
-    @Column(name = "GoodsId")
-    private Long goodsId;
-    @Column(name = "Price")
+
+
     private BigDecimal price;
-    @Column(name = "Amount")
+
     private Long amount;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Pharmacy pharmacy;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Goods goods;
 }

@@ -24,7 +24,7 @@ Create Table if not exists Characteristic
     Id INT Primary Key AUTO_INCREMENT,
     Name varchar(20) NOT NULL
 );
-Create Table if not exists GoodsCharacteristics
+Create Table if not exists Goodscharacteristics
 (
     Id INT PRIMARY KEY AUTO_INCREMENT,
     CharId       LONG References Characteristic (Id),

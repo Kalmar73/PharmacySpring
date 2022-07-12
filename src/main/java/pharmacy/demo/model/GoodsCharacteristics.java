@@ -1,23 +1,15 @@
 package pharmacy.demo.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "GoodsCharacteristics")
-@Getter
-@Setter
-@ToString
+@Table(name = "Goodscharacteristics")
+@Data
 public class GoodsCharacteristics extends BaseEntity{
-    @Column(name = "CharId")
-    private Long charId;
-    @Column(name = "GoodsId")
-    private Long goodsId;
+
     @Column(name = "Description")
     private String description;
+
 }
