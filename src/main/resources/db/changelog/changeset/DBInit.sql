@@ -1,4 +1,6 @@
+-- liquibase formatted sql
 
+-- changeset Jaroslav:1
 Create Table if not exists pharmacy
 (
     Id   INT Primary key AUTO_INCREMENT,

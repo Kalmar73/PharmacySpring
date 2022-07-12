@@ -1,4 +1,6 @@
+--liquibase formatted sql
 
+--changeset jaroslav:2
 INSERT INTO Pharmacy (name, phone, address, fullname)
 VALUES ('Vita', '89264532020', 'Lukashenko 25', 'Vasiliy Vasilievich');
 INSERT INTO Pharmacy (name, phone, address, fullname)
@@ -30,8 +32,6 @@ VALUES ('Слабодействующее');
 
 INSERT INTO Goodscharacteristics (goods_id, characteristic_id,  Description)
 VALUES (1, 4, 'Слабодействующее обезболивающее');
-INSERT INTO Goodscharacteristics (goods_id, characteristic_id,  Description)
-VALUES (1, 7, 'Слабодействующее обезболивающее');
 INSERT INTO Goodscharacteristics (goods_id, characteristic_id,  Description)
 VALUES (2, 4, 'Сильнодействующее обезболивающее');
 INSERT INTO Goodscharacteristics (goods_id, characteristic_id,  Description)
