@@ -1,22 +1,19 @@
--- liquibase formatted sql
-
--- changeset Jaroslav:1
-Create Table if not exists Pharmacy
+Create Table if not exists pharmacy
 (
-    Id   LONG Primary key AUTO_INCREMENT,
-    Name              varchar(60) NOT NULL,
-    Phone_Number      varchar(11) NOT NULL,
-    Address            varchar(120) NOT NULL,
-    DirectorFullName varchar(120) NOT NULL
+    id   INT Primary key AUTO_INCREMENT,
+    name              varchar(60) NOT NULL,
+    phone      varchar(11) NOT NULL,
+    address            varchar(120) NOT NULL,
+    fullname varchar(120) NOT NULL
 );
 Create Table if not exists Goods
 (
-    Id    LONG Primary Key AUTO_INCREMENT,
+    Id    INT Primary Key AUTO_INCREMENT,
     Name          varchar(160)
 );
 Create Table if not exists AvailableGoods
 (
-    Id LONG PRIMARY KEY AUTO_INCREMENT,
+    Id INT PRIMARY KEY AUTO_INCREMENT,
     PharmacyId LONG References Pharmacy (Id),
     GoodsId      LONG References Goods (Id),
     Price DECIMAL NOT NULL ,
@@ -24,12 +21,12 @@ Create Table if not exists AvailableGoods
 );
 Create Table if not exists Characteristic
 (
-    Id LONG Primary Key,
+    Id INT Primary Key AUTO_INCREMENT,
     Name varchar(20) NOT NULL
 );
 Create Table if not exists GoodsCharacteristics
 (
-    Id LONG PRIMARY KEY ,
+    Id INT PRIMARY KEY AUTO_INCREMENT,
     CharId       LONG References Characteristic (Id),
     GoodsId                 LONG References Goods (Id),
     Description varchar(300)

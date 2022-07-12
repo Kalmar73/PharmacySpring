@@ -19,48 +19,48 @@ public class PharmacyRestController {
     @Autowired
     private PharmacyService pharmacyService;
 
-    @RequestMapping(value = "{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<Pharmacy> getCustomer(@PathVariable("id") Long customerId) {
-        if (customerId == null) {
+    @RequestMapping(value = "{Id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Pharmacy> getCustomer(@PathVariable("Id") Long pharmacyId) {
+        if (pharmacyId == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        Pharmacy customer = this.pharmacyService.getById(customerId);
+        Pharmacy pharmacy = this.pharmacyService.getById(pharmacyId);
 
-        if (customer == null) {
+        if (pharmacy == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(customer, HttpStatus.OK);
+        return new ResponseEntity<>(pharmacy, HttpStatus.OK);
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<Pharmacy> saveCustomer(@RequestBody @Valid Pharmacy customer) {
+    public ResponseEntity<Pharmacy> saveCustomer(@RequestBody @Valid Pharmacy pharmacy) {
         HttpHeaders headers = new HttpHeaders();
 
-        if (customer == null) {
+        if (pharmacy == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        this.pharmacyService.save(customer);
-        return new ResponseEntity<>(customer, headers, HttpStatus.CREATED);
+        this.pharmacyService.save(pharmacy);
+        return new ResponseEntity<>(pharmacy, headers, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<Pharmacy> updateCustomer(@RequestBody @Valid Pharmacy customer) {
+    public ResponseEntity<Pharmacy> updateCustomer(@RequestBody @Valid Pharmacy pharmacy) {
         HttpHeaders headers = new HttpHeaders();
 
-        if (customer == null) {
+        if (pharmacy == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        this.pharmacyService.save(customer);
+        this.pharmacyService.save(pharmacy);
 
-        return new ResponseEntity<>(customer, headers, HttpStatus.OK);
+        return new ResponseEntity<>(pharmacy, headers, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<Pharmacy> deleteCustomer(@PathVariable("id") Long id) {
+    @RequestMapping(value = "{Id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Pharmacy> deleteCustomer(@PathVariable("Id") Long id) {
         Pharmacy pharmacy = this.pharmacyService.getById(id);
 
         if (pharmacy == null) {
@@ -74,7 +74,7 @@ public class PharmacyRestController {
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<List<Pharmacy>> getAllCustomers() {
-        List<Pharmacy> pharmacies = this.pharmacyService.getAll();
+        List<Pharmacy> pharmacies = pharmacyService.getAll();
 
         if (pharmacies.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -9,17 +9,17 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Pharmacy")
+@Table(name = "pharmacy")
 @Getter
 @Setter
 @ToString
 public class Pharmacy extends BaseEntity {
-    @Column(name = "Name")
+    @Column(name = "name")
     private String name;
-    @Column(name = "Address")
-    private String adress;
-    @Column(name = "Director_FullName")
-    private String fullname;
-    @Column(name = "Phone_Number")
+    @Column(name = "phone")
     private String phoneNumber;
+    @Column(name = "address")
+    private String address;
+    @Column(name = "fullname")
+    private String fullname;
 }

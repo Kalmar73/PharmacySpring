@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - includeAll:
+      path: db/changelog/changeset/
+  - include:
+      file: db/changelog/changeset/DBInit.sql
+  - include:
+      file: db/changelog/changeset/populateDB.sql
