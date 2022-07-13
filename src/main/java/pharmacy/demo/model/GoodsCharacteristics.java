@@ -1,6 +1,8 @@
 package pharmacy.demo.model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,9 +17,11 @@ public class GoodsCharacteristics {
     private String description;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonManagedReference
     private Characteristic characteristic;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonManagedReference
     private Goods goods;
 
 

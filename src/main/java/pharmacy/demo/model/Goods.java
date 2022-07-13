@@ -1,6 +1,8 @@
 package pharmacy.demo.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,9 +16,11 @@ public class Goods {
     private String name;
 
     @OneToMany(mappedBy = "goods", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<AvailableGoods> availableGoodsList;
 
     @OneToMany(mappedBy = "goods", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<GoodsCharacteristics> goodsCharacteristicsList;
 
 

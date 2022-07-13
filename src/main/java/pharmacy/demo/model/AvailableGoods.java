@@ -1,6 +1,7 @@
 package pharmacy.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -18,9 +19,11 @@ public class AvailableGoods {
     private Long amount;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonManagedReference
     private Pharmacy pharmacy;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonManagedReference
     private Goods goods;
 
     public Long getId() {
