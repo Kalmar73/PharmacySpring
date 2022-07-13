@@ -1,11 +1,27 @@
 package pharmacy.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "Availablegoods")
-public class AvailableGoods{
+public class AvailableGoods {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private BigDecimal price;
+
+    private Long amount;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Pharmacy pharmacy;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Goods goods;
 
     public Long getId() {
         return id;
@@ -46,18 +62,4 @@ public class AvailableGoods{
     public void setGoods(Goods goods) {
         this.goods = goods;
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private BigDecimal price;
-
-    private Long amount;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Pharmacy pharmacy;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Goods goods;
 }

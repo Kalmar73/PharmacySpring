@@ -8,7 +8,7 @@ import pharmacy.demo.repository.GoodsRepository;
 import java.util.List;
 
 @Service
-public class GoodsServiceImpl implements GoodsService{
+public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
     GoodsRepository goodsRepository;

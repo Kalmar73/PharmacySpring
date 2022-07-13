@@ -13,6 +13,13 @@ public class Goods {
     @Column(name = "Name")
     private String name;
 
+    @OneToMany(mappedBy = "goods", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<AvailableGoods> availableGoodsList;
+
+    @OneToMany(mappedBy = "goods", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<GoodsCharacteristics> goodsCharacteristicsList;
+
+
     public Long getId() {
         return id;
     }
@@ -44,10 +51,4 @@ public class Goods {
     public void setGoodsCharacteristicsList(List<GoodsCharacteristics> goodsCharacteristicsList) {
         this.goodsCharacteristicsList = goodsCharacteristicsList;
     }
-
-    @OneToMany(mappedBy = "goods",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<AvailableGoods> availableGoodsList;
-
-    @OneToMany(mappedBy = "goods",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<GoodsCharacteristics> goodsCharacteristicsList;
 }

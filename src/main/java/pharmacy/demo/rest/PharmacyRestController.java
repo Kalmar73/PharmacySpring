@@ -46,17 +46,27 @@ public class PharmacyRestController {
         return new ResponseEntity<>(pharmacy, headers, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<Pharmacy> updateCustomer(@RequestBody @Valid Pharmacy pharmacy) {
+    @RequestMapping(value = "{Id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Pharmacy> updateCustomer(@PathVariable("Id") Long pharmacyId,@RequestBody @Valid Pharmacy pharmacy) {
         HttpHeaders headers = new HttpHeaders();
 
-        if (pharmacy == null) {
+        if ((pharmacyId == null)&&(pharmacy == null)){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+        Pharmacy pharmacyModified = this.pharmacyService.getById(pharmacyId);
 
-        this.pharmacyService.save(pharmacy);
+        if (pharmacyModified == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        pharmacyModified.setAddress(pharmacy.getAddress());
+        pharmacyModified.setFullname(pharmacy.getFullname());
+        pharmacyModified.setAvailableGoodsList(pharmacy.getAvailableGoodsList());
+        pharmacyModified.setName(pharmacy.getName());
+        pharmacyModified.setPhoneNumber(pharmacy.getPhoneNumber());
 
-        return new ResponseEntity<>(pharmacy, headers, HttpStatus.OK);
+        this.pharmacyService.save(pharmacyModified);
+
+        return new ResponseEntity<>(pharmacyModified, headers, HttpStatus.OK);
     }
 
     @RequestMapping(value = "{Id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

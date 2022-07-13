@@ -11,6 +11,16 @@ public class GoodsCharacteristics {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "Description")
+    private String description;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Characteristic characteristic;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Goods goods;
+
+
     public Long getId() {
         return id;
     }
@@ -42,13 +52,4 @@ public class GoodsCharacteristics {
     public void setGoods(Goods goods) {
         this.goods = goods;
     }
-
-    @Column(name = "Description")
-    private String description;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Characteristic characteristic;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Goods goods;
 }
