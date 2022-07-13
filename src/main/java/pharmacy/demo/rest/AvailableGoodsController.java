@@ -46,17 +46,27 @@ public class AvailableGoodsController {
         return new ResponseEntity<>(availableGoods, headers, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<AvailableGoods> updateCustomer(@RequestBody @Valid AvailableGoods availableGoods) {
+    @RequestMapping(value = "{Id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<AvailableGoods> updateCustomer(@PathVariable("Id") Long id, @RequestBody @Valid AvailableGoods availableGoods) {
         HttpHeaders headers = new HttpHeaders();
 
-        if (availableGoods == null) {
+        if ((id == null)&&(availableGoods == null)){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+        AvailableGoods availableGoodsModified = this.availableGoodsService.getById(id);
 
-        this.availableGoodsService.save(availableGoods);
+        if (availableGoodsModified == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 
-        return new ResponseEntity<>(availableGoods, headers, HttpStatus.OK);
+        availableGoodsModified.setGoods(availableGoods.getGoods());
+        availableGoodsModified.setAmount(availableGoods.getAmount());
+        availableGoodsModified.setPharmacy(availableGoods.getPharmacy());
+        availableGoodsModified.setPrice(availableGoods.getPrice());
+
+        this.availableGoodsService.save(availableGoodsModified);
+
+        return new ResponseEntity<>(availableGoodsModified, headers, HttpStatus.OK);
     }
 
     @RequestMapping(value = "{Id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

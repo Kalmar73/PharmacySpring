@@ -46,17 +46,26 @@ public class GoodsCharacteristicController {
         return new ResponseEntity<>(goodsCharacteristics, headers, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<GoodsCharacteristics> updateCustomer(@RequestBody @Valid GoodsCharacteristics goodsCharacteristics) {
+    @RequestMapping(value = "{Id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<GoodsCharacteristics> updateCustomer(@PathVariable("Id") Long id, @RequestBody @Valid GoodsCharacteristics goodsCharacteristics) {
         HttpHeaders headers = new HttpHeaders();
 
-        if (goodsCharacteristics == null) {
+        if ((id == null)&&(goodsCharacteristics == null)){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+        GoodsCharacteristics goodsCharacteristicsModified = this.goodsCharacteristicServce.getById(id);
 
-        this.goodsCharacteristicServce.save(goodsCharacteristics);
+        if (goodsCharacteristicsModified == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 
-        return new ResponseEntity<>(goodsCharacteristics, headers, HttpStatus.OK);
+        goodsCharacteristicsModified.setGoods(goodsCharacteristics.getGoods());
+        goodsCharacteristicsModified.setCharacteristic(goodsCharacteristics.getCharacteristic());
+        goodsCharacteristicsModified.setDescription(goodsCharacteristics.getDescription());
+
+        this.goodsCharacteristicServce.save(goodsCharacteristicsModified);
+
+        return new ResponseEntity<>(goodsCharacteristicsModified, headers, HttpStatus.OK);
     }
 
     @RequestMapping(value = "{Id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

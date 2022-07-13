@@ -46,17 +46,25 @@ public class CharacteristicRestController {
         return new ResponseEntity<>(characteristic, headers, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<Characteristic> updateCustomer(@RequestBody @Valid Characteristic characteristic) {
+    @RequestMapping(value = "{Id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Characteristic> updateCustomer(@PathVariable("Id") Long id, @RequestBody @Valid Characteristic characteristic) {
         HttpHeaders headers = new HttpHeaders();
 
-        if (characteristic == null) {
+        if ((id == null)&&(characteristic == null)){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+        Characteristic characteristicModified = this.characteristicsService.getById(id);
 
-        this.characteristicsService.save(characteristic);
+        if (characteristicModified == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 
-        return new ResponseEntity<>(characteristic, headers, HttpStatus.OK);
+        characteristicModified.setGoodsCharacteristicsList(characteristic.getGoodsCharacteristicsList());
+        characteristicModified.setName(characteristic.getName());
+
+        this.characteristicsService.save(characteristicModified);
+
+        return new ResponseEntity<>(characteristicModified, headers, HttpStatus.OK);
     }
 
     @RequestMapping(value = "{Id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

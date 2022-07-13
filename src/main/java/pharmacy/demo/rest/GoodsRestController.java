@@ -46,17 +46,26 @@ public class GoodsRestController {
         return new ResponseEntity<>(goods, headers, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<Goods> updateCustomer(@RequestBody @Valid Goods goods) {
+    @RequestMapping(value = "{Id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Goods> updateCustomer(@PathVariable("Id") Long goodsId, @RequestBody @Valid Goods goods) {
         HttpHeaders headers = new HttpHeaders();
 
-        if (goods == null) {
+        if ((goodsId == null)&&(goods == null)){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+        Goods goodsModified = this.goodsService.getById(goodsId);
 
-        this.goodsService.save(goods);
+        if (goodsModified == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 
-        return new ResponseEntity<>(goods, headers, HttpStatus.OK);
+        goodsModified.setGoodsCharacteristicsList(goods.getGoodsCharacteristicsList());
+        goodsModified.setAvailableGoodsList(goods.getAvailableGoodsList());
+        goodsModified.setName(goods.getName());
+
+        this.goodsService.save(goodsModified);
+
+        return new ResponseEntity<>(goodsModified, headers, HttpStatus.OK);
     }
 
     @RequestMapping(value = "{Id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
